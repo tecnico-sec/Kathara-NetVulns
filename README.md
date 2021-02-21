@@ -10,29 +10,12 @@ vulnerabilidades em redes, nomeadamente as vulnerabilidades associadas a
 protocolos que não cifram as comunicações (telnet) e ataques como *ARP
 spoofing, TCP reset* e ICMP *echo reply redirection.*
 
-Neste laboratório vamos usar um laboratório Netkit com três máquinas da
+Neste laboratório vamos usar um laboratório Kathara com três máquinas da
 mesma LAN: *pc1, pc2* e *badpc*. Execute esse laboratório, observe a
 topologia da rede e os endereços IP das máquinas.
 
-Para realizar este guia é preciso o *nemesis,* que não está instalado na
-imagem dos laboratórios. Descarregue o *nemesis-1.5.tar.xz* a partir de
-<https://github.com/troglobit/nemesis/releases> e instale-o na máquina
-virtual (principal) como explicado em
-<https://github.com/troglobit/nemesis> (tar xf\..., etc.). Depois
-execute num terminal nessa mesma máquina virtual:
-
-```bash
-cp /usr/bin/nemesis ~/
-```
-
-Sempre que precisar de usar o *nemesis* numa máquina virtual do Netkit
-basta executar:
-
-```bash
-cp /hosthome/nemesis /usr/bin/
-```
-
-Para obter informação sobre o *nemesis* use *man nemesis*
+Para realizar este guia é preciso o *nemesis,* que está instalado na
+imagem dos laboratórios. Para obter informação sobre o *nemesis* use `man nemesis`.
 
 ## Exercício 1 -- Telnet
 
@@ -44,27 +27,29 @@ protege a comunicação.
 1.  Corra o comando *tcpdump* no *badpc:*
 
 ```bash
-tcpdump -i eth0 --X dst <IP do pc1>
+tcpdump -i eth0 -X dst <IP do pc1>
 ```
 
 2.  No *pc1* crie um utilizador chamado *teste* usando o comando:
 
-> *adduser teste*
+```bash
+adduser teste
+```
 
 3.  Corra o seguinte comando de modo a garantir que é possível fazer
     *telnet* para esse PC:
 
 ```bash
-/etc/init.d/inetd restart
+/etc/init.d/openbsd-inetd restart
 ```
 
-4.  No *pc2* execute *telnet \<IP do pc1\>*. Repare como o *tcpdump*
+4.  No *pc2* execute `telnet <IP do pc1>`. Repare como o *tcpdump*
     permite ver (*eavesdrop*) a *password* a ser enviada caracter por
     caracter.
 
 5.  Nota final: como pode observar o *telnet* é extremamente inseguro,
-    logo nunca deve ser usado. A alternativa é o *ssh*, que veremos mais
-    tarde.
+    logo nunca deve ser usado em canais inseguros. Uma alternativa é
+     o *ssh*, que veremos mais tarde.
 
 ## Exercício 2 -- ARP *spoofing*
 
@@ -122,7 +107,7 @@ conexão.
     segmentos TCP com o bit ACK (bit 13) a 1:
 
 ```bash
-tcpdump -S -n -e -l "tcp\[13\]&16 == 16"
+tcpdump -S -n -e -l "tcp[13]&16 == 16"
 ```
 
 2.  No *pc2* faça uma ligação *telnet* para o *pc1*, pois esta
@@ -156,7 +141,7 @@ de destino for um endereço de *broadcast* (mas geralmente existem
     de origem e destino dos pacotes:
 
 ```bash
-tcpdump "ips[9]=1"
+tcpdump "ip[9]=1"
 ```
 
 2.  No *badpc* envie um pacote ICMP com um endereço de origem
@@ -174,8 +159,11 @@ nemesis icmp -S <IP do pc2> -D <IP do pc1>
 
 ## Referências
 
--   Netkit, [http://wiki.netkit.org/][1]
+-   Kathara, [https://github.com/KatharaFramework/Kathara/wiki][1]
 
--   man nemesis
+-   `man nemesis`
+
+-   Nemesis, [https://github.com/troglobit/nemesis][2]
 
   [1]: http://wiki.netkit.org/
+  [2]: https://github.com/troglobit/nemesis
