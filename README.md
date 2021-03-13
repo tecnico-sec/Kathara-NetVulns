@@ -11,8 +11,8 @@ O objectivo deste guia é aprofundar os conhecimentos sobre vulnerabilidades em 
 Neste laboratório vamos usar um laboratório *Kathará* com três máquinas da mesma LAN: *pc1, pc2* e *badpc*.
 Execute o laboratório, observe a topologia da rede e os endereços IP das máquinas.
 
-Para realizar este guia é preciso o *nemesis*, que está instalado na imagem dos laboratórios.
-Esta ferramente permite construir e injetar pacotes na rede.
+Neste guia vamos usar o *nemesis*, que está instalado na imagem dos laboratórios.
+Esta ferramente permite construir e injetar pacotes simples na rede facilmente.
 Para obter mais informação sobre o *nemesis* consulte o manual, através do comando `man nemesis`.
 
 ----
