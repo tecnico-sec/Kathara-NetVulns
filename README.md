@@ -127,7 +127,7 @@ Esta técnica é usada como parte de ataques de negação de serviço (*denial-o
 1.  Execute o seguinte comando no *badpc* para observar os endereços IP de origem e destino dos pacotes:
 
 ```bash
-tcpdump "ip[9]=1"
+tcpdump "ip[9]=1" &
 ```
 
 2.  No *badpc* envie um pacote ICMP com um endereço de origem falsificado:
