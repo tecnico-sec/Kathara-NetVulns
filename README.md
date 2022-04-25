@@ -82,7 +82,7 @@ nemesis arp -v -S <IP do pc2> -D <IP do pc1> -h <MAC do badpc> -m <MAC do pc1>
 6.  Para observar o resultado do ataque na tabela ARP, execute o seguinte comando no *pc1*: `arp -a`. 
 Repare que este ataque não é permanente e que tem de repetir o comando acima periodicamente para a alteração permanecer (a cada 10 minutos para a configuração do debian10 usado nas imagens do laboratório).
 
-7.  Para observar o efeito do resultado, execute o comando `tcpdump -i eth0` no *badpc* e no *pc2*.
+7.  Para observar o efeito do resultado, execute o comando `tcpdump -e -i eth0` no *badpc* e no *pc2*.
 No *pc1*, execute o comando `ping <IP do pc2>` e observe que os pacotes enviados pelo comando *ping* são redirecionados para o *badpc*.
 
 ----
@@ -124,7 +124,7 @@ O ataque consiste em falsificar (*spoof*) o endereço IP de origem enviado num p
 Esta técnica é usada como parte de ataques de negação de serviço (*denial-of-service*);
 é particularmente eficaz se o endereço IP de destino for um endereço de difusão (*broadcast*), mas geralmente existem regras nas *firewalls* que impedem este tipo de ataque.
 
-1.  Execute o seguinte comando no *badpc* para observar os endereços IP de origem e destino dos pacotes:
+1.  Execute o seguinte comando no *PC2* para observar os endereços IP de origem e destino dos pacotes:
 
 ```bash
 tcpdump "ip[9]=1" &
