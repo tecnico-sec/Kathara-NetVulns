@@ -121,7 +121,7 @@ Qual foi o valor de *\< sequence number\>* usado?
 ## Exercício 4 -- ICMP *echo reply redirection*
 
 O ataque consiste em falsificar (*spoof*) o endereço IP de origem enviado num pacote ICMP *echo request* de modo a que a resposta seja enviada para outro computador.
-Esta técnica é usada como parte de ataques de negação de serviço (*denial-of-service*);
+Esta técnica é usada como parte de *Smurf attacks* que são uma forma de ataques de negação de serviço (*denial-of-service*);
 é particularmente eficaz se o endereço IP de destino for um endereço de difusão (*broadcast*), mas geralmente existem regras nas *firewalls* que impedem este tipo de ataque.
 
 1.  Execute o seguinte comando no *PC2* para observar os endereços IP de origem e destino dos pacotes:
